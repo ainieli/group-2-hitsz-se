@@ -1,0 +1,571 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="231bf7be-8064-47f1-935b-22341c784fdd" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="-930252818">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.0" value="1" />
+          <entry key="project.open.time.30" value="1" />
+          <entry key="project.open.time.57" value="1" />
+          <entry key="project.opened" value="3" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="jpg" value="1" />
+          <entry key="kv" value="12" />
+          <entry key="py" value="96" />
+          <entry key="txt" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="Image" value="1" />
+          <entry key="PLAIN_TEXT" value="13" />
+          <entry key="Python" value="95" />
+          <entry key="Scratch" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="dummy" value="10" />
+          <entry key="kv" value="465" />
+          <entry key="py" value="17590" />
+          <entry key="txt" value="34" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="PLAIN_TEXT" value="509" />
+          <entry key="Python" value="17568" />
+          <entry key="Scratch" value="22" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="代码" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/movie_sys.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="96" column="26" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
+              <folding>
+                <element signature="e#42#79#0" expanded="true" />
+                <marker date="1545909434041" expanded="true" signature="24864:25109" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="670">
+              <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main.kv">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="930">
+              <caret line="1922" selection-start-line="1922" selection-end-line="1922" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/idcode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="424">
+              <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>scrapy</find>
+      <find>GetNowTime</find>
+      <find>FileListEntry</find>
+      <find>up</find>
+      <find>print</find>
+      <find>on_end_year</find>
+      <find>display_selected_end_year</find>
+      <find>show_season_selection</find>
+      <find>Factory</find>
+      <find>SaveDialog</find>
+      <find>平均</find>
+      <find>按</find>
+      <find>评分</find>
+      <find>出演次数</find>
+      <find>count</find>
+      <find>count = 0</find>
+      <find>按评分</find>
+      <find>折线图</find>
+      <find>password</find>
+      <find>data</find>
+      <find>savefig</find>
+      <find>.svg</find>
+      <find>.pdf</find>
+      <find>pdf</find>
+      <find>.jpg</find>
+      <find>jpg</find>
+      <find>convert_images_to_pdf</find>
+      <find>WordCloud</find>
+      <find>PRIN</find>
+      <find>CONVER</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/LogInMain.kv" />
+        <option value="$PROJECT_DIR$/../../计算机网络实验/计算机网络实验2018-网络层实验-第二次实验/实验8 ICMP ping程序/Ping.py" />
+        <option value="$PROJECT_DIR$/../../模式识别实验（自主）/Bayes分类器（基于高斯分布）/bayes_classifier.py" />
+        <option value="$PROJECT_DIR$/test_matplotlib.py" />
+        <option value="$PROJECT_DIR$/csv/Catalog.py" />
+        <option value="$PROJECT_DIR$/screenmanager.kv" />
+        <option value="$PROJECT_DIR$/Catalog.kv" />
+        <option value="$PROJECT_DIR$/movie_info_sequence.txt" />
+        <option value="$PROJECT_DIR$/identify.py" />
+        <option value="$PROJECT_DIR$/Catalog.py" />
+        <option value="$PROJECT_DIR$/try.py" />
+        <option value="$PROJECT_DIR$/MovieScreen.py" />
+        <option value="$PROJECT_DIR$/1/hm2/spiders/house.py" />
+        <option value="$PROJECT_DIR$/1.py" />
+        <option value="$PROJECT_DIR$/movie_Data_processing/Movie_data_Processing.py" />
+        <option value="$PROJECT_DIR$/Movie_data_Processing.py" />
+        <option value="$PROJECT_DIR$/idcode.py" />
+        <option value="$PROJECT_DIR$/jpg_to_pdf.py" />
+        <option value="$PROJECT_DIR$/main.kv" />
+        <option value="$PROJECT_DIR$/scrapy.kv" />
+        <option value="$PROJECT_DIR$/test1.py" />
+        <option value="$PROJECT_DIR$/music.py" />
+        <option value="$PROJECT_DIR$/../../计算机网络实验/计算机网络实验-2018-传输应用层-第三次实验/实验12 Web服务器编程/server_bonus1.py" />
+        <option value="$PROJECT_DIR$/../../计算机网络实验/计算机网络实验-2018-传输应用层-第三次实验/实验12 Web服务器编程/server_bonus2.py" />
+        <option value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/server.py" />
+        <option value="$PROJECT_DIR$/text.py" />
+        <option value="$PROJECT_DIR$/movie_sys.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="-7" />
+    <option name="width" value="697" />
+    <option name="height" value="735" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="代码" type="b2602c69:ProjectViewProjectNode" />
+              <item name="代码" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="Python" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="E:\大三各科作业\软件工程项目\代码\1\hm2\spiders" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.movie_sys">
+    <configuration default="true" type="PythonConfigurationType" factoryName="Python">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="movie_sys" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/movie_sys.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="scratch" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$APPLICATION_CONFIG_DIR$/scratches/scratch.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="server" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/server.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="text" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="代码" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\python3.7\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/text.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Python.movie_sys" />
+      <item itemvalue="Python.scratch" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.server" />
+      <item itemvalue="Python.text" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.movie_sys" />
+        <item itemvalue="Python.text" />
+        <item itemvalue="Python.server" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.scratch" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="231bf7be-8064-47f1-935b-22341c784fdd" name="Default Changelist" comment="" />
+      <created>1543477529332</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1543477529332</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49612403" visible="true" weight="0.15178572" />
+      <window_info id="Structure" order="1" weight="0.25" />
+      <window_info id="Favorites" order="2" sideWeight="0.503876" side_tool="true" weight="0.15178572" />
+      <window_info anchor="bottom" id="Terminal" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.50074404" side_tool="true" weight="0.39016393" />
+      <window_info anchor="bottom" id="Python Console" order="2" weight="0.3294509" />
+      <window_info anchor="bottom" id="Message" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.36885247" />
+      <window_info anchor="bottom" id="Version Control" order="5" show_stripe_button="false" />
+      <window_info active="true" anchor="bottom" id="Run" order="6" sideWeight="0.49925596" visible="true" weight="0.39016393" />
+      <window_info anchor="bottom" id="Debug" order="7" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="9" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="10" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../../计算机网络实验/计算机网络实验2018-网络层实验-第二次实验/计科一班 SZ160110130 肖安琪 第二次实验/Ping.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/WeatherApp.kv" />
+    <entry file="file://$PROJECT_DIR$/test_matplotlib.py" />
+    <entry file="file://$PROJECT_DIR$/Catalog.py" />
+    <entry file="file://$PROJECT_DIR$/screenmanager.kv" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/sy8.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/movie/MovieScreen.py" />
+    <entry file="file://F:/python3.7/Lib/site-packages/kivy/lang/parser.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="100">
+          <caret line="461" selection-start-line="461" selection-end-line="461" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MovieScreen.py" />
+    <entry file="file://$PROJECT_DIR$/try.py" />
+    <entry file="file://$PROJECT_DIR$/kivy测试学习代码/MovieScreen.py" />
+    <entry file="file://$PROJECT_DIR$/idcode.jpg" />
+    <entry file="file://$PROJECT_DIR$/../../大数据导论/作业二/SZ160110130_肖安琪_Homework2/hm2/spiders/house.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-2520" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/hm2/main.py" />
+    <entry file="file://$PROJECT_DIR$/../../大数据导论/作业二/SZ160110130_肖安琪_Homework2/hm2/main.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/1/hm2/main.py" />
+    <entry file="file://$PROJECT_DIR$/hm2/spiders/house.py" />
+    <entry file="file://$PROJECT_DIR$/1/hm2/spiders/items.py" />
+    <entry file="file://$PROJECT_DIR$/1.py" />
+    <entry file="file://$PROJECT_DIR$/1/hm2/spiders/house.py" />
+    <entry file="file://$PROJECT_DIR$/movie_Data_processing/Movie_data_Processing.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/thirdscreen.py" />
+    <entry file="file://F:/python3.7/Lib/site-packages/kivy/lang/builder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="618" selection-start-line="618" selection-end-line="618" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/4-6.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/read_data.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/jpg_to_pdf.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/read-data.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/some_bugs_fixed.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/seventhscreen_changed.py" />
+    <entry file="file://$PROJECT_DIR$/jpg_to_pdf.py" />
+    <entry file="file://$PROJECT_DIR$/Movie_data_Processing.py" />
+    <entry file="file://$PROJECT_DIR$/../App/dist/test/kivy/core/window/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="154">
+          <caret line="15" column="37" lean-forward="true" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../App/dist/test/kivy/core/window/window_sdl2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="16" lean-forward="true" selection-start-line="16" selection-end-line="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../App/dist/test/server.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/scrapy.kv" />
+    <entry file="file://F:/python3.7/Lib/site-packages/kivy/uix/floatlayout.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="134" selection-start-line="134" selection-end-line="134" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test1.py" />
+    <entry file="file://$USER_HOME$/Documents/Tencent Files/364856589/FileRecv/new_scrapy.py" />
+    <entry file="file://$PROJECT_DIR$/../kivy测试学习代码/test_matplotlib.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="1" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music.py" />
+    <entry file="file://$PROJECT_DIR$/../../计算机网络实验/计算机网络实验-2018-传输应用层-第三次实验/实验12 Web服务器编程/server_bonus2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="11" column="18" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../计算机网络实验/计算机网络实验-2018-传输应用层-第三次实验/实验12 Web服务器编程/server_xaq.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="19" column="50" selection-start-line="19" selection-start-column="4" selection-end-line="19" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../计算机网络实验/计算机网络实验-2018-传输应用层-第三次实验/实验12 Web服务器编程/server_bonus1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="132">
+          <caret line="45" column="70" selection-start-line="45" selection-start-column="4" selection-end-line="45" selection-end-column="70" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../App/dist/xingchen_movie/server.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="5" column="12" lean-forward="true" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/idcode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="424">
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.kv">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="1922" selection-start-line="1922" selection-end-line="1922" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="670">
+          <caret line="40" column="2" selection-start-line="40" selection-start-column="2" selection-end-line="40" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/movie_sys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="96" column="26" selection-start-line="96" selection-start-column="26" selection-end-line="96" selection-end-column="26" />
+          <folding>
+            <element signature="e#42#79#0" expanded="true" />
+            <marker date="1545909434041" expanded="true" signature="24864:25109" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

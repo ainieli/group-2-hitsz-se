@@ -1,0 +1,2861 @@
+##:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#: set background_source './pictures/timg.jpg'
+#: set idcode_source './pictures/idcode.jpg'
+#: set button_source './pictures/button.png'
+#: set identity ''      # 设置一个名叫identity的全局变量表明登陆者的身份是
+                       # 游客(visitor)还是注册者(register)，得到的权限不一样
+#: set music_button './pictures/music.png'
+#: set blank_plot_path './pictures/blank.png'
+#: import main movie_sys
+#: import ListAdapter kivy.adapters.listadapter.ListAdapter
+#: import Factory kivy.factory.Factory
+#: import catalog_size movie_sys.catalog_size
+
+
+
+
+
+MyScreenManager:
+<MyScreenManager>:
+    #transition: FadeTransition()  # 换页特效
+    FirstPage:
+    RegisterGUI:
+    LogInGUI:
+    Catalog:
+    Scrapy:
+    Management:
+	SecondScreen:
+	ThirdScreen:
+	FourthScreen:
+	FifthScreen:
+	SixthScreen:
+	SeventhScreen:
+	EighthScreen:
+	SaveDialog:
+
+
+
+<FirstPage>:
+    name: "firstpage"
+    BoxLayout:
+		canvas.before:
+			BorderImage:
+				source: background_source
+				pos: self.pos
+				size: self.size
+        orientation: 'vertical'
+		BoxLayout:
+			size_hint_y: 0.28
+			#canvas.before:
+			#	BorderImage:
+			#		#source: './pictures/jiaopian.gif'
+			#		#source: './pictures/timg.jpg'
+			#		pos: self.pos
+			#		size: self.size
+			Label:
+				text: '星辰电影'
+				font_size: 50
+				font_name: 'FZSTK'
+				text_size: self.width - 80, None
+				valign: 'middle'
+        BoxLayout:
+			size_hint_y: 0.8
+			Label:
+				text: root.classical_line
+				text_size: self.width - 50, self.height - 50
+				allow_stretch: True
+				font_name: 'STKAITI.TTF'
+				font_size: 20
+				valign: 'middle'
+				halign: 'center'
+        BoxLayout:
+			size_hint_y: 0.15
+            Label:
+				size_hint_x: 3
+            Button:
+                size_hint_x: 4
+                text: '登录'
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    root.NextPage("login")
+					root.ShowClassicalLines()
+            Label:
+				size_hint_x: 2
+            Button:
+                size_hint_x: 4
+                text: '注册'
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    root.NextPage("register")
+					root.ShowClassicalLines()
+            Label:
+				size_hint_x: 3
+		Label:
+			size_hint_y: 0.1
+
+
+<LogInGUI>:
+    name: "login"
+    name_input: name
+    password_input: password
+    idcode_input: idcode
+    image: image
+    info: information
+    BoxLayout:
+		spacing: 10
+		canvas.before:
+			BorderImage:
+				source: background_source
+                pos: self.pos
+                size: self.size
+		BoxLayout:
+			size_hint_x: 1
+			orientation: "vertical"
+			Label:
+				size_hint_y: 2.2
+				text: "登录"
+				#color: [1,0.4,0.1,1]
+				font_size: "50px"
+				valign: 'middle'
+				font_name: 'FZSTK'
+				text_size: self.width-80,self.height
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 30
+					text: "用户名(user name):"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: name
+					size_hint_x: 60
+					multiline: False                # 仅允许一行输入
+					write_tab: False                # 禁用tab
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 30
+					text: "密码(password):"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: password
+					password: root.password_hide    # 是否回显星号
+					size_hint_x: 30
+					multiline: False
+					write_tab: False
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+				Button:
+					text: "回显/隐藏"
+					size_hint_x: 15
+					font_size: "16px"
+					background_normal: music_button
+					on_release:
+						root.HidePassword()         # 改变回显状态
+					font_name: 'STKAITI.TTF'
+				Button:
+					text: "忘记密码"
+					size_hint_x: 15
+					font_size: "16px"
+					background_normal: music_button
+					on_release:
+						identity = name.text     
+						root.GetText()
+						if root.InitUserList() == True and root.NameNotInList() == False and root.IsReservedKey() == False: root.NextPage("management")
+						root.ShowText()
+						root.ClearTextInput()
+						root.SaveIndentity(identity)
+					font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "80dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 30
+					text: "验证码(idcode):"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: idcode
+					size_hint_x: 30
+					multiline: False                # 禁用Enter键
+					write_tab: False                # 禁用tab
+					font_size: "30px"
+					font_name: 'STKAITI.TTF'
+				Image:
+					id: image
+					size_hint_x: 23
+					source: idcode_source           # 初始化图片来源
+				Button:
+					size_hint_x: 7
+					text: '刷新'
+					font_name: 'STKAITI.TTF'
+					on_release:
+						root.LoadImage()            # 重新加载验证码图片
+			Label:
+				id: information
+				font_size: "20px"
+				color: [1, 0, 0, 1]
+				font_name: 'STKAITI.TTF'
+			BoxLayout:
+				size_hint_y: 1.5
+				Button:
+					size_hint: None, None
+					height: 50
+					width: 50
+					#text: "返回"
+					#size_hint_x: 2
+					background_normal: './pictures/prev_dir.png'
+					background_down: './pictures/prev_dir_down.png'
+					on_release:
+						root.NextPage("firstpage")
+						root.ClearTextInput()
+						root.ClearInfo()
+					#font_name: 'STKAITI.TTF'
+					#font_size: 18
+				BoxLayout:
+					orientation: 'vertical'
+					BoxLayout:
+						height: "40dp"
+						#size_hint_y: None
+						Label:
+							size_hint_x: 1
+						Button:
+							text: "登录"
+							size_hint_x: 2
+							background_normal: music_button
+							on_release:
+								root.GetText()                                              # 从输入框中得到信息
+								identity = name.text                     # 初始化注册用户列表
+								if root.InitUserList() == True and root.SuccessToLogIn() == True and root.ClearInfo(): root.NextPage("catalog")  # 成功登录，跳转新窗口
+								else: root.ShowText()                                       # 否则打印错误信息
+								root.ClearTextInput()                                       # 清空输入框
+								root.LoadImage()                                            # 重新加载验证码图片
+								root.SaveIndentity(identity)                                # 将身份保存下来（在全局变量中）
+							font_name: 'STKAITI.TTF'
+							font_size: 18
+						Label:
+							size_hint_x: 1
+						Button:
+							text: "游客"
+							size_hint_x: 2
+							background_normal: music_button
+							on_release:
+								identity = "visitor"            # 身份是游客
+								root.NextPage("catalog")        # 跳转新窗口
+								root.SaveIndentity(identity)    # 将身份保存下来（在全局变量中）
+								root.ClearInfo()
+								root.ClearTextInput()
+							font_name: 'STKAITI.TTF'
+							font_size: 18
+						Label:
+							size_hint_x: 1
+					Label:
+						size_hint_y: 0.4
+		Label:
+			size_hint_x: 0.01
+			
+
+<RegisterGUI>:
+    name: "register"
+    question_first: QF
+    question_second: QS
+    name_input: name
+    password_input: password
+    # idcode_input: idcode
+    # image: image
+    info: information
+    BoxLayout:
+		spacing: 10
+		canvas.before:
+			BorderImage:
+				source: background_source
+                pos: self.pos
+                size: self.size
+		BoxLayout:
+			size_hint_x: 1
+			orientation: "vertical"
+			Label:
+				size_hint_y: 2.2
+				text: "注册"
+				#color: [1,0.4,0.1,1]
+				valign: 'middle'
+				text_size: self.width-80,self.height
+				font_size: "50px"
+				font_name: 'FZSTK'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 20
+					text: "用户名(user name):"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: name
+					size_hint_x: 40
+					multiline: False
+					write_tab: False
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 20
+					text: "密码(password):"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: password
+					password: root.password_hide    # 是否回显星号
+					size_hint_x: 30
+					multiline: False
+					write_tab: False
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+				Button:
+					text: "回显/隐藏"
+					size_hint_x: 10
+					font_size: "16px"
+					on_release:
+						root.HidePassword()         # 改变回显状态
+					font_name: 'STKAITI.TTF'
+			Label:
+				size_hint_y: 0.6
+				text: "注意：以下两个验证问题请全部回答并牢记，不可修改"
+				#color: [1,0.4,0.1,1]
+				font_size: "16px"
+				font_name: 'STKAITI.TTF'
+			Label:
+				size_hint_y: 0.6
+				text: "它们将作为你未来密码丢失时的验证依据"
+				#color: [1,0,0,1]
+				font_size: "16px"
+				font_name: 'STKAITI.TTF'
+			Label:
+				size_hint_y: 0.6
+				text: "你的任何答案将被记录下来"
+				#color: [1,0,0,1]
+				font_size: "16px"
+				font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 20
+					text: "Q1:你的生日？"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: QF
+					size_hint_x: 40
+					multiline: False
+					write_tab: False
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: None
+				Label:
+					size_hint_x: 20
+					text: "Q2:你的名字？"
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				TextInput:
+					id: QS
+					size_hint_x: 40
+					multiline: False
+					write_tab: False
+					font_size: "22px"
+					font_name: 'STKAITI.TTF'
+			Label:
+				id: information
+				height: "30dp"
+				text: ''
+				font_size: "20px"
+				color:
+				font_name: 'STKAITI.TTF'
+			BoxLayout:
+				height: "40dp"
+				size_hint_y: 1.5
+				Button:
+					#text: "返回"
+					size_hint: None, None
+					height: 50
+					width: 50
+					background_normal: './pictures/prev_dir.png'
+					background_down: './pictures/prev_dir_down.png'
+					on_release:
+						root.ClearTextInput()
+						information.text = ''
+						root.NextPage("firstpage")
+					#font_name: 'STKAITI.TTF'
+				BoxLayout:
+					orientation: 'vertical'
+					BoxLayout:
+						size_hint_y: 1
+						Label:
+						Button:
+							text: "注册"
+							font_size: 20
+							#size_hint_x: 1
+							background_normal: music_button
+							on_release:
+								root.GetText()              # 获取文本内容
+								if root.InitUserList() == True: root.NewUser()
+								root.ShowText()             # 抛出注册信息
+								root.ClearTextInput()       # 清空输入框
+								# root.LoadImage()            # 重新加载验证码图片
+							font_name: 'STKAITI.TTF'
+						Label:
+					Label:
+						size_hint_y: 0.4
+		Label:
+			size_hint_x: 0.01
+
+<Management>:
+    question_first: QF
+    question_second: QS     
+    password_change_input: password_change
+    password_again_input: password_again
+    info: information
+    name: "management"
+    user_name: user_name
+	BoxLayout:
+		orientation: 'vertical'
+		canvas.before:
+			BorderImage:
+				source: background_source
+				pos: self.pos
+				size: self.size
+		BoxLayout:
+			size_hint_y: 6
+			spacing: 10
+			BoxLayout:
+				size_hint_x: 1
+				orientation: 'vertical'
+				BoxLayout:
+					size_hint_y: 1
+					Label:
+						size_hint_x: 7
+						text: "用户名："
+						font_size: "18px"
+						font_name: 'STKAITI.TTF'
+					Button:
+						size_hint_x: 4
+						text: '刷新'
+						font_size: "18px"
+						font_name: 'STKAITI.TTF'
+						background_normal: music_button
+						on_release:
+							root.ShowName()
+							user_name.color = [1,1,1,1]  # Label显示为显眼的白色
+					Label:
+						id: user_name
+						size_hint_x: 10
+						color: [0.5,0.5,0.5,1]
+						text: '按下"刷新"获取用户名'
+						font_size: "22px"
+						font_name: 'STKAITI.TTF'
+				Label:
+					size_hint_y: 1
+					text: "以下两个验证问题(Q1 Q2)仅需回答正确一个即可"
+					#color: [1,0.4,0.1,1]
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'
+				BoxLayout:
+					size_hint_y: 4
+					BoxLayout:
+						size_hint_x: 7
+						orientation: 'vertical'
+						Label:
+							text: "Q1 你的生日"
+							font_size: "18px"
+							font_name: 'STKAITI.TTF'
+						Label:
+							text: "Q2 你的名字"
+							font_size: "18px"
+							font_name: 'STKAITI.TTF'
+						Label:
+							text: "新密码："
+							font_size: "18px"
+							font_name: 'STKAITI.TTF'
+						Label:
+							text: "再次输入："
+							font_size: "18px"
+							font_name: 'STKAITI.TTF'
+						
+					BoxLayout:
+						orientation: 'vertical'
+						size_hint_x: 14
+						TextInput:
+							id: QF
+							font_size: "30px"
+							font_name: 'STKAITI.TTF'
+							multiline: False
+							write_tab: False
+						TextInput:
+							id: QS
+							font_size: "30px"
+							font_name: 'STKAITI.TTF'
+							multiline: False
+							write_tab: False
+						TextInput:
+							id: password_change
+							font_size: "30px"
+							font_name: 'STKAITI.TTF'
+							password: True
+							multiline: False
+							write_tab: False
+						TextInput:
+							id: password_again
+							font_size: "30px"
+							font_name: 'STKAITI.TTF'
+							password: True
+							multiline: False
+							write_tab: False
+				Label:
+					size_hint_y: 0.6
+					id: information
+					text: ''
+					font_size: "18px"
+					font_name: 'STKAITI.TTF'	
+			Label:
+				size_hint_x: 0.01
+		BoxLayout:
+			size_hint_y: 1
+			Button:
+				size_hint: None, None
+				height: self.parent.height
+				width: self.parent.height
+				#text: "返回"
+				font_size: "18px"
+				font_name: 'STKAITI.TTF'
+				background_normal: './pictures/prev_dir.png'
+				background_down: './pictures/prev_dir_down.png'
+				on_release:
+					root.ReturnPage()
+					root.ClearTextInput()
+					root.ClearName()
+			Button:
+				height: self.parent.height
+				width: self.parent.width - self.parent.height
+				text: "确认修改密码"
+				font_size: "18px"
+				font_name: 'STKAITI.TTF'
+				background_normal: music_button
+				on_release:
+					root.GetText()
+					root.SuccessToChangePassword()
+					root.ShowText()
+					root.ClearTextInput()				
+		
+            
+
+
+<Catalog>:
+    name: "catalog"
+    BoxLayout:
+		canvas.before:
+			BorderImage:
+				source: background_source
+                pos: self.pos
+                size: self.size
+        orientation: 'vertical'
+		spacing: 10
+        Label:
+        Label:
+            size_hint_y: 12
+            font_size: "40px"
+            font_name: 'FZSTK'
+            text: "通用功能区"
+			text_size: self.width-80,self.height
+			valign: 'middle'
+        BoxLayout:
+            size_hint_y: 10
+            Label:
+                size_hint_x: 10
+            Button:
+                size_hint_x: 25
+                text: "票房走势"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.NextPage('fourth')
+            Label:
+                size_hint_x: 15
+            Button:
+                size_hint_x: 25
+                text: "票房题材占比"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.NextPage('third')
+            Label:
+                size_hint_x: 10
+        BoxLayout:
+            size_hint_y: 10
+            Label:
+                size_hint_x: 10
+            Button:
+                size_hint_x: 25
+                text: "劳模演员"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.NextPage('fifth')
+            Label:
+                size_hint_x: 15
+            Button:
+                size_hint_x: 25
+                text: "Top电影"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.NextPage('sixth')
+            Label:
+                size_hint_x: 10
+        BoxLayout:
+            size_hint_y: 10
+            Label:
+                size_hint_x: 10
+            Button:
+                size_hint_x: 25
+                text: "搜索"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.NextPage('SearchScreen')
+            Label:
+                size_hint_x: 15
+            Button:
+                size_hint_x: 25
+                text: "最佳导演"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    root.NextPage('eighth')
+            Label:
+                size_hint_x: 10
+        Label:
+            size_hint_y: 15
+            font_size: "40px"
+            font_name: 'FZSTK'
+            text: "注册用户功能区"
+			text_size: self.width-80,self.height
+			valign: 'middle'
+        BoxLayout:
+            size_hint_y: 10
+            Label:
+                size_hint_x: 10
+			Button:
+                size_hint_x: 30
+                text: "打印报表"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    identity = root.GetID()
+                    if identity != "visitor": root.NextPage("seventh")        # 跳转目录
+                    #else: information.text = "游客不能使用该功能!"
+					else: Factory.VisitorLimit().open()
+            Label:
+                size_hint_x: 10
+            Button:
+                size_hint_x: 30
+                text: "爬虫"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    identity = root.GetID()
+                    if identity != "visitor": root.NextPage("scrapy")        # 跳转目录
+                    #else: information.text = "游客不能使用该功能!"
+					else: Factory.VisitorLimit().open()
+            Label:
+                size_hint_x: 10
+            Button:
+                size_hint_x: 30
+                text: "注册用户管理"
+                font_size: "18px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    identity = root.GetID()
+                    if identity != "visitor": root.NextPage("management")        # 跳转目录
+                    #else: information.text = "游客不能使用该功能!"
+					else: Factory.VisitorLimit().open()
+            Label:
+                size_hint_x: 10
+        Label:
+            size_hint_y: 0.01
+		BoxLayout:
+			size_hint_y: 10
+			spacing: 1
+			Button:
+                size_hint_x: 30
+                text: "音乐开/关"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+					root.Music()
+			Button:
+                size_hint_x: 30
+                text: "注销"
+                font_size: "20px"
+                font_name: 'STKAITI.TTF'
+				background_normal: music_button
+                on_release:
+                    root.NextPage('firstpage')
+
+
+# 爬虫
+<Scrapy>:
+	name: "scrapy"
+	canvas:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+		    source: background_source
+	BoxLayout:
+		orientation: "vertical"
+		#spacing: 15
+		BoxLayout:
+			size_hint_y: 0.8
+			Label:
+			Button:
+				size_hint: None,None
+				background_normal: 'pictures/bugs.png'
+				background_down: 'pictures/bugs.png'
+				width: self.parent.height * 1.2
+				height: self.parent.height
+				on_release: 
+					#root.update_data()
+					Factory.SpiderInfo().open()
+			Label:
+			#Image:
+				#source: "pictures/bugs.png"
+	    Label:
+	    	size_hint_y: 0.2
+	    	text: '单击年份选择更新数据的年份，点击图片获取最新数据'
+	    	font_name: 'STKAITI.TTF'
+	    	font_size: 20
+	    BoxLayout:
+	    	size_hint_y: 0.3
+	    	orientation: "horizontal"
+	    	spacing: 20
+	    	BoxLayout:
+	    	ToggleButton:
+				id: 2018
+	    		text: "2018"
+	    		on_release: 
+    				if self.state=='down':  root.add_years(self.text)
+    				else:  root.remove_years(self.text)
+	    	ToggleButton:
+				id: 2017
+	    		text: "2017"
+	    		on_release: 
+    				if self.state=='down':  root.add_years(self.text)
+    				else:  root.remove_years(self.text)
+	    	ToggleButton:
+				id: 2016
+	    		text: "2016"
+	    		on_release: 
+    				if self.state=='down':  root.add_years(self.text)
+    				else:  root.remove_years(self.text)
+	    	ToggleButton:
+				id: 2015
+	    		text: "2015"
+	    		on_release: 
+    				if self.state=='down':  root.add_years(self.text)
+    				else:  root.remove_years(self.text)
+	    	BoxLayout:
+	    BoxLayout:
+			size_hint_y: 0.3
+	    	Button:
+			    size_hint: None, None
+			    width: self.parent.height
+			    height: self.parent.height
+			    border: 0,0,0,0
+			    background_down: 'pictures/prev_dir_down.png'
+			    background_normal: 'pictures/prev_dir.png'
+			    on_release:
+			    	root.NextPage("catalog")
+					root.clear_everything()
+
+	
+#搜索界面
+<SecondScreen>:
+	name:"SearchScreen"
+	content: search_box
+	history: search_history_list
+	result_found: search_result_list
+	title: movie_title
+	time: release_time
+	movie_genre: genre
+	movie_grade: grade
+	movie_director: director
+	movie_actors: actors
+	movie_BoxOffice: BoxOffice
+	sort_way: sort_by
+	sort_list_selection: sort_list
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    source: background_source
+	BoxLayout:
+		orientation: "horizontal"
+		BoxLayout:
+			size_hint_x : 0.25
+			orientation: "vertical"
+			spacing: 20
+			BoxLayout:
+				orientation: "vertical"
+				spacing: 10
+				#test不合理操作，但是目前还没想出别的解决办法
+		        Label:
+		        	size_hint_y: 0.0001
+		        	text_size: self.width*0.00001, self.width*0.000001
+		        	text: str(search_history_list.adapter.selection)[23:-2]
+		        	on_text: root.display_search_text(self.text)
+		        Label:
+		        	size_hint_y: 0.0001
+		        	text_size: self.width*0.00001, self.width*0.000001
+		        	text: str(search_result_list.adapter.selection)[23:-2]
+		        	on_text: 
+						if self.text!='':  root.show_details(self.text)
+						else: root.show_empty()
+		        	#on_text: if self.text!='':  print("big apple")
+		        Label:
+		        	size_hint_y: 0.0001
+		        	text_size: self.width*0.00001, self.width*0.000001
+		        	text: str(sort_list.adapter.selection)[23:-2]
+		        	on_text: 
+		        		if self.text!='':  root.display_sort(self.text)
+		        		print(self.text)
+		        	#on_text: if self.text!='':  print("big apple")
+				##########
+				Label:
+					text: "Search for anything you'd like! 主题/电影/演员/导演"
+					font_size: '20px'
+        			text_size: self.width, None
+        			font_name: "STKAITI.TTF"
+        			color: 1,1,1,1
+        			size_hint_y: 0.35
+        		BoxLayout:
+        			size_hint_y: 0.9
+        			orientation: "vertical"
+        			BoxLayout:
+						size_hint_y: 0.3
+        				#spacing: 8
+        				orientation: "horizontal"
+	        			TextInput:
+				            id: search_box
+				            font_name: "STKAITI.TTF"
+							size_hint_x: 0.65
+							size_hint_y: 1
+							multiline: False
+							write_tab: False
+							font_size: '20px'
+				        #显示历史记录
+			        	MyButton:
+			        		id: show_search_history
+			        		size_hint_x: 0.15
+			        		on_state:   
+					            if self.state == 'down': root.show_history()
+					            else: root.clear_history()
+					    #确认搜索按钮
+			        	Button:
+			        		size_hint_x: 0.15
+			        		background_down: 'pictures/search_down.png'
+						    #background_normal: 'pictures/search_bt.png'
+							background_normal: 'pictures/fdj.png'
+						    width: self.width
+						    height: self.parent.height*0.5
+						    #点击确认按钮若无结果，popup提示无结果
+			        		on_release:  if root.Searchinfo(search_box.text)==None: Factory.NoSearchResultFoundPopup().open()
+			        		#显示搜索结果+加入搜索历史+无结果加载popup提示无结果 Factory.Mypopup().open()
+					ListView:
+			        	id: search_history_list
+			        	size_hint_x: 0.684
+						size_hint_y: 0.8
+			        	adapter:
+			            	ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+				Label:
+			    	text:"结果排序方式选择"
+			    	color: 1,1,1,1
+			    	font_name: "STKAITI.TTF"
+			    	text_size: self.width, None
+					font_size: '24px'
+					size_hint_y: 0.15
+			    BoxLayout:
+			    	size_hint_y: 0.6
+			    	orientation: "vertical"
+			    	BoxLayout:
+			    		orientation: "horizontal"
+			    		size_hint_y: 0.4
+			    		Label:
+			    			id: sort_by
+			    			font_name: "STKAITI.TTF"
+							font_size: 20
+			    			size_hint_x: 1
+			    			canvas.before:
+				                Color:
+				                    rgba: 1, 1, 1, 1
+				                Rectangle:
+				                    pos: self.pos
+				                    size: self.size
+				            color: 0,0,0,1
+			    		MyButton:
+			        		id: show_sort_selection
+			        		size_hint_x: 0.2
+			        		on_state:   
+					            if self.state == 'down': root.show_sort_selection()
+					            else: root.clear_sort_selection()
+					    BoxLayout:
+					    	size_hint_x: 0.15
+					ListView:
+			        	id: sort_list
+			        	size_hint_x: 0.741
+			        	size_hint_y: 0.8
+			        	adapter:
+			            	ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+				Label:
+			    	#text: "Search Result"
+			    	text: "搜索结果"
+			    	font_name: "STKAITI.TTF"
+			    	font_size: '24px'
+        			text_size: self.width, None
+        			color: 1,1,1,1
+					size_hint_y: 0.15
+        		ListView:
+					size_hint_y: 1
+		        	id: search_result_list
+		        	adapter:
+		            	ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+		        BoxLayout:
+					size_hint_y: 0.3
+				    Button:
+					    size_hint: None, None
+					    width: 50
+					    height: 50
+					    border: 0,0,0,0
+					    background_down: 'pictures/prev_dir_down.png'
+					    background_normal: 'pictures/prev_dir.png'
+					    on_release:
+					    	root.clear_everything()
+					        root.NextPage("catalog")
+
+		########分界线########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########分界线########
+		BoxLayout:
+			size_hint_x: 0.40
+			orientation: "vertical"
+			spacing: 10
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 5
+				Label:
+					#text: "movie title"
+					text: "电影名"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					#color: 0,0.35,1,1
+					color: 1,1,1,1
+				Label:
+					id: movie_title
+					#text: "Gone Girl"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					valign: "middle"
+					halign: "center"
+					text_size: self.width,None
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 5
+				Label:
+					#text: "release time"
+					text: "发行时间"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					#color: 0, 0,4, 0.8, 1
+					color: 1,1,1,1
+				Label
+					id: release_time
+					#text: "2014/11/3"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 5
+				Label:
+					#text: "genre"
+					text: "题材"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					#color: 0,0.6,0.9,1
+					color: 1,1,1,1
+				Label
+					id: genre
+					#text: "Horror"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 5
+				Label:
+					text: "评分"
+					font_name: "STKAITI.TTF"
+					font_size: '24px'
+					color: 1,1,1,1
+				Label
+					id: grade
+					#text: "8.0"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 10
+				Label:
+					#text: "director"
+					text: "导演"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+				Label
+					id: director
+					#text: "David Fincher"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 10
+				Label:
+					#text: "Actors"
+					text: "演员"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+				Label
+					id: actors
+					#text: "Ben Affleck  Rosamund Pike"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					valign: "middle"
+					halign: "center"
+					text_size: self.width, None
+					color: 1,1,1,1
+			BoxLayout:
+				orientation: "horizontal"
+				spacing: 10
+				Label:
+					#text: "BoxOffice"
+					text: "票房"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+				Label
+					id: BoxOffice
+					#text: "$15000"
+					font_size: '24px'
+					font_name: "STKAITI.TTF"
+					color: 1,1,1,1
+		BoxLayout:
+			size_hint_x: 0.2
+			orientation: 'vertical'
+			Image:
+				id: image
+				source: './pictures/blank.png'
+				#size_hint_y: 0.3
+				size_hint: None, None
+				width: self.parent.width
+				height: self.parent.width * 1.33
+			BoxLayout:
+				size_hint_y: 0.7
+				
+
+<ThirdScreen>:
+	name: "third"
+    search_year_start: which_year_start
+    search_season: which_season
+    search_month: which_month
+    month_results: month_result
+    year_results_start: year_result_start
+    #year_results_end: year_result_end
+    season_results: season_result
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		spacing: 15
+		orientation: 'horizontal'
+		BoxLayout:
+	        size_hint_x : 0.2
+	        orientation: "vertical"
+	        spacing: 5
+			Label:
+				size_hint_y: 0.05
+	        Label:
+	        	size_hint_y: 0.25
+	        	text_size: self.width, None
+	        	#text: "Time Range "
+	        	text: "时间范围"
+	        	font_name: "STKAITI.TTF"
+				font_size: '28px'
+	        #test不合理操作，但是目前还没想出别的解决办法
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_start.adapter.selection)[23:-2]
+	        	on_text: root.change_start_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	#text: str(year_result_end.adapter.selection)[23:-2]
+	        	on_text: root.change_end_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(season_result.adapter.selection)[23:-2]
+	        	on_text: root.change_season_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(month_result.adapter.selection)[23:-2]
+	        	on_text: root.change_month_text(self.text)
+	        ######
+	        Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "start year:"
+	        	text: "年份"
+	        	color: 1, 1, 1, 1
+	        	font_name: "STKAITI.TTF"
+				font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: '20px'
+	        		#text_size: self.width, None
+	        		font_name: "simhei"
+					id:which_year_start
+					#on_text: root.search_for_end_year(self.text)
+					color: 0,0,0,1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+			    	id: show_start_year
+			        size_hint_x: 0.2
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_start_year_selection()
+			            else: root.clear_start_year_selection()
+			BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:year_result_start
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: " season:"
+	        	text: "季节"
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: '20px'
+			BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+			        id:which_season
+			        font_name: "simhei"
+			        font_size: '20px'
+	        		#text_size: self.width, None
+			        on_text: root.search_for_month(self.text)
+			        color: 0,0,0,1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+					size_hint_x: 0.2
+			    	id: show_season
+			        on_state:   
+			            if self.state == 'down': root.show_season_selection()
+			            else: root.clear_season_selection()
+			BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:season_result
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: " month:"
+	        	text: "月份"
+	        	font_name:"STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: '20px'
+			BoxLayout:
+	        	orientation: "horizontal"
+	        	size_hint_y: 0.2
+		        Label:
+					size_hint_x: 0.8
+			        id:which_month
+			        font_size: '20px'
+			        font_name: "simhei"
+	        		#text_size: self.width, None
+			        color: 0,0,0,1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+					size_hint_x: 0.2
+			        id: show_month
+			        on_state:   
+			            if self.state == 'down': root.show_month_selection()
+			            else: root.clear_month_selection()
+			BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:month_result
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			BoxLayout:
+				size_hint_y: 0.3
+			    Button:
+				    size_hint: None, None
+				    width: 50
+				    height: 50
+				    border: 0,0,0,0
+				    background_down: 'pictures/prev_dir_down.png'
+				    background_normal: 'pictures/prev_dir.png'
+				    on_release: 
+				    	root.clear_everything()
+						root.NextPage("catalog")
+		#########分界线#########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########################
+		BoxLayout:
+			orientation: "vertical"
+			spacing: 10
+			Label:
+				size_hint_y: 0.001
+			BoxLayout:
+				size_hint_y: 0.13
+				orientation: "horizontal"
+				BoxLayout:
+					Label:
+						size_hint_x: 0.85
+						#text: "Visualization Function"
+						text: "票房题材占比"
+						font_name: "FZSTK"
+						font_size: '40px'
+						text_size: self.width, None
+						color: 1, 1, 1, 1
+					BoxLayout:
+						size_hint_x: 0.55
+					BoxLayout:
+						size_hint_x: 0.30
+						orientation: 'vertical'
+						Label:
+							size_hint_y: 0.03
+						Button:
+							size_hint_y: 0.1
+							text: "打印"
+							font_name: "STKAITI.TTF"
+							font_size: 20
+							background_normal: music_button
+							on_release: 
+								root.current_plot_export()
+			BoxLayout:
+				spacing: 5
+				size_hint_y: 0.1
+				ToggleButton:
+					id: pie chart
+					group: "visualization function"
+					#text: "pie chart"
+					text: "饼图"
+					font_name: "STKAITI.TTF"
+					font_size: '20px'
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+
+				ToggleButton:
+					id: word cloud
+					group: "visualization function"
+					#text: "word cloud"
+					text: "词云"
+					font_name: "STKAITI.TTF"
+					font_size: '20px'
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+				ToggleButton:
+					id: bar plot
+					group: "visualization function"
+					#text: "bar plot"
+					text: "条形图"
+					font_name: "STKAITI.TTF"
+					font_size: '20px'
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+        		Label:
+        			id: function
+        			canvas.before:
+		                Color:
+		                    rgba: 1, 1, 1, 1
+		                Rectangle:
+		                    pos: self.pos
+		                    size: self.size
+		            color: 0,0,0,1
+		            font_name: "STKAITI.TTF"
+					font_size: '20px'
+        		Button:
+        			text: "apply"
+					font_size: '20px'
+					background_normal: music_button
+        			on_release: 
+        				if function.text=='': Factory.Mypopup().open()  
+        				elif which_year_start.text=='' or which_season.text=='' or which_month.text=='':  Factory.MyTimepopup().open()
+        				else: root.FilmTheme_BoxOffice_plot()
+			BoxLayout:
+				Image: 
+					id: picture
+					source: blank_plot_path
+		Label:
+			size_hint_x: 0.01
+
+#票房走势界面
+<FourthScreen>:
+	name: 'fourth'
+    search_year_start: which_year_start
+    search_year_end: which_year_end
+    year_results_start: year_result_start
+    year_results_end: year_result_end
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		spacing: 15
+		orientation: 'horizontal'
+		BoxLayout:
+	        size_hint_x : 0.2
+	        orientation: "vertical"
+	        spacing: 5
+			Label:
+				size_hint_y: 0.05
+	        Label:
+	        	size_hint_y: 0.25
+	        	text_size: self.width, None
+	        	#text: "Time Range "
+	        	text: "时间范围"
+	        	font_name: "STKAITI.TTF"
+	        	font_size: 28
+			Label:
+				size_hint_y: 0.05
+	        #test不合理操作，但是目前还没想出别的解决办法
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_start.adapter.selection)[23:-2]
+	        	on_text: root.change_start_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_end.adapter.selection)[23:-2]
+	        	on_text: root.change_end_year_text(self.text)
+	        ######
+	        Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "start year:"
+	        	text: "开始年份"
+	        	color: 1, 1, 1, 1
+	        	font_name: "STKAITI.TTF"
+	        	font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_start
+					#text: str(year_result_start.adapter.selection)[23:-2]
+					on_text: root.search_for_end_year(self.text)
+					color: 0,0,0,1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+					size_hint_x: 0.3
+			    	id: show_start_year
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_start_year_selection()
+			            else: root.clear_start_year_selection()
+			BoxLayout:
+				size_hint_y: 0.8
+			    ListView: 
+			        id:year_result_start
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "end year:"
+	        	text: "结束年份"
+	        	font_name :"STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+	        	font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_end
+					#text: str(year_result_end.adapter.selection)[23:-2]
+					color: 0, 0, 0, 1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+					size_hint_x: 0.3
+			    	id: show_end_year_selection
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_end_year_selection()
+			            else: root.clear_end_year_selection()
+			BoxLayout:
+				size_hint_y: 0.8
+			    ListView: 
+			        id:year_result_end
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			BoxLayout:
+				size_hint_y: 0.3
+			    Button:
+				    size_hint: None, None
+				    width: 50
+				    height: 50
+				    border: 0,0,0,0
+				    background_down: 'pictures/prev_dir_down.png'
+				    background_normal: 'pictures/prev_dir.png'
+				    on_release: 
+				    	root.clear_everything()
+						root.NextPage("catalog")
+						#app.root.current="fifth"
+		#########分界线#########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########################
+		BoxLayout:
+			orientation: "vertical"
+			spacing: 10
+			Label:
+				size_hint_y: 0.001
+			BoxLayout:
+				size_hint_y: 0.13
+				orientation: "horizontal"
+				BoxLayout:
+					Label:
+						size_hint_x: 0.85
+						#text: "Visualization Function"
+						text: "票房走势"
+						text_size: self.width, None
+						font_name: "FZSTK"
+						font_size: '40px'
+						color: 1, 1, 1, 1
+					BoxLayout:
+						size_hint_x: 0.55
+					BoxLayout:
+						size_hint_x: 0.3
+						orientation: 'vertical'
+						Label:
+							size_hint_y: 0.03
+						Button:
+							size_hint_y: 0.1
+							text: "打印"
+							font_name: "STKAITI.TTF"
+							font_size: 20
+							background_normal: music_button
+							on_release: 
+								root.current_plot_export()
+			BoxLayout:
+				spacing: 15
+				size_hint_y: 0.1
+				ToggleButton:
+					id: line chart
+					group: "visualization function"
+					#text: "pie chart"
+					text: "折线图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+				ToggleButton:
+					id: box plot
+					group: "visualization function"
+					#text: "word cloud"
+					text: "箱线图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+        		Label:
+        			id: function
+        			canvas.before:
+		                Color:
+		                    rgba: 1, 1, 1, 1
+		                Rectangle:
+		                    pos: self.pos
+		                    size: self.size
+		            color: 0, 0, 0, 1
+		            font_name: "STKAITI.TTF"
+					font_size: 20
+        		Button:
+        			text: "apply"
+					font_size: 20
+					background_normal: music_button
+        			on_release: 
+        				if function.text=='': Factory.Mypopup().open()
+        				elif which_year_start.text=='' or which_year_end.text=='':  Factory.MyTimepopup().open()
+        				else: root.Year_BoxOffice_plot()
+			BoxLayout:
+				Image: 
+					id: picture
+					source: blank_plot_path
+		Label:
+			size_hint_x: 0.01
+
+#top演员界面
+<FifthScreen>:
+	name: "fifth"
+	search_year_start: which_year_start
+    search_year_end: which_year_end
+    year_results_start: year_result_start
+    year_results_end: year_result_end
+    sorting_way: which_sorting_way
+    sorting_selections: sorting_selection
+    top_selections: top_selection
+    top_num: top
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		spacing: 15
+		orientation: 'horizontal'
+		BoxLayout:
+	        size_hint_x : 0.2
+	        orientation: "vertical"
+	        spacing: 5
+			Label:
+				size_hint_y: 0.05
+	        Label:
+	        	size_hint_y: 0.25
+	        	text_size: self.width, None
+	        	#text: "Time Range "
+	        	text: "时间范围"
+	        	font_name: "STKAITI.TTF"
+				font_size: '28px'
+	        #test不合理操作，但是目前还没想出别的解决办法
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_start.adapter.selection)[23:-2]
+	        	on_text: root.change_start_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_end.adapter.selection)[23:-2]
+	        	on_text: root.change_end_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(sorting_selection.adapter.selection)[23:-2]
+	        	on_text:  root.change_sorting_text(self.text)	
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(top_selection.adapter.selection)[23:-2]
+	        	on_text:  root.change_top_text(self.text)
+
+	        ######
+	        Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "start year:"
+	        	text: "开始年份"
+	        	color: 1, 1, 1, 1
+	        	font_name: "STKAITI.TTF"
+				font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_start
+					#text: str(year_result_start.adapter.selection)[23:-2]
+					on_text: root.search_for_end_year(self.text)
+					color: 0, 0, 0, 1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+			    	id: show_start_year
+			        size_hint_x: 0.2
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_start_year_selection()
+			            else: root.clear_start_year_selection()
+			BoxLayout:
+				size_hint_y: 0.55
+			    ListView: 
+			        id:year_result_start
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "end year:"
+	        	text: "结束年份"
+	        	font_name :"STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_end
+					#text: str(year_result_end.adapter.selection)[23:-2]
+					color: 0, 0, 0, 1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+			    	id: show_end_year_selection
+			        size_hint_x: 0.2
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_end_year_selection()
+			            else: root.clear_end_year_selection()
+			BoxLayout:
+				size_hint_y: 0.55
+			    ListView: 
+			        id:year_result_end
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+				size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	text: "排序方式选择"
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: '20px'
+	        BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+			        id:which_sorting_way
+			        font_size: 20
+	        		#text_size: self.width, None
+	        		font_name: "STKAITI.TTF"
+			        #on_text: root.search_for_month(self.text)
+			        color: 0, 0, 0, 1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+			    	id: show_sorting_way
+			        size_hint_x: 0.2
+			        on_state:   
+			            if self.state == 'down': root.show_sorting_selection()
+			            else: root.clear_sorting_selection()
+		    BoxLayout:
+				size_hint_y: 0.55
+			    ListView: 
+			        id:sorting_selection
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+				size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	text: "Top"
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: 20
+			BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+			        id: top
+			        font_size: 20
+	        		#text_size: self.width, None
+			        #on_text: root.search_for_month(self.text)
+			        color: 0, 0, 0, 1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+			    	id: show_top_way
+			        size_hint_x: 0.2
+			        on_state:   
+			            if self.state == 'down': root.show_top_selection()
+			            else: root.clear_top_selection()
+		    BoxLayout:
+				size_hint_y: 0.55
+			    ListView: 
+			        id:top_selection
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			BoxLayout:
+				size_hint_y: 0.35
+			    Button:
+				    size_hint: None, None
+				    width: 48
+				    height: 48
+				    border: 0,0,0,0
+				    background_down: 'pictures/prev_dir_down.png'
+				    background_normal: 'pictures/prev_dir.png'
+				    on_release: 
+						root.clear_everything()
+						root.NextPage("catalog")
+						#app.root.current="sixth"
+		#########分界线#########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########################
+		BoxLayout:
+			orientation: "vertical"
+			spacing: 10
+			Label:
+				size_hint_y: 0.001
+			BoxLayout:
+				size_hint_y: 0.13
+				orientation: "horizontal"
+				BoxLayout:
+					Label:
+						size_hint_x: 0.85
+						#text: "Visualization Function"
+						text: "劳模演员"
+						font_name: "FZSTK"
+						font_size: 40
+						text_size: self.width, None
+						color: 1, 1, 1, 1
+					BoxLayout:
+						size_hint_x: 0.55
+					BoxLayout:
+						size_hint_x: 0.3
+						orientation: 'vertical'
+						Label:
+							size_hint_y: 0.03
+						Button:
+							size_hint_y: 0.1
+							text: "打印"
+							font_name: "STKAITI.TTF"
+							font_size: 20
+							background_normal: music_button
+							on_release: 
+								root.current_plot_export()
+			BoxLayout:
+				spacing: 15
+				size_hint_y: 0.1
+				ToggleButton:
+					id: word cloud
+					group: "visualization function"
+					#text: "word cloud"
+					text: "词云图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+				ToggleButton:
+					id: bar plot
+					group: "visualization function"
+					#text: "bar plot"
+					text: "条形图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+        		Label:
+        			id: function
+        			canvas.before:
+		                Color:
+		                    rgba: 1, 1, 1, 1
+		                Rectangle:
+		                    pos: self.pos
+		                    size: self.size
+		            color: 0, 0, 0, 1
+		            font_name: "STKAITI.TTF"
+					font_size: 20
+        		Button:
+        			text: "apply"
+					font_size: 20
+					background_normal: music_button
+        			on_release: 
+	        			if function.text=='': Factory.Mypopup().open()
+	        			elif which_year_start.text=='' or which_year_end.text=='':  Factory.MyTimepopup().open()
+	        			elif which_sorting_way.text=='': Factory.MySortingpopup().open()
+	        			elif top.text=='': Factory.MyToppopup().open()
+	        			else: root.Top_movie_actors_plot()
+			BoxLayout:
+				Image:
+					id: picture
+					source: blank_plot_path
+		Label:
+			size_hint_x: 0.01
+
+#top电影界面
+<SixthScreen>:
+	name: "sixth"
+	search_year_start: which_year_start
+    year_results_start: year_result_start
+    sorting_way: which_sorting_way
+    sorting_selections: sorting_selection
+    top_selections: top_selection
+    top_num: top
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		spacing: 15
+		orientation: 'horizontal'
+		BoxLayout:
+	        size_hint_x : 0.2
+	        orientation: "vertical"
+	        spacing: 5
+			Label:
+				size_hint_y: 0.05
+	        Label:
+	        	size_hint_y: 0.25
+	        	text_size: self.width, None
+	        	#text: "Time Range "
+	        	text: "时间范围"
+	        	font_name: "STKAITI.TTF"
+				font_size: 28
+	        #test不合理操作，但是目前还没想出别的解决办法
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_start.adapter.selection)[23:-2]
+	        	on_text: root.change_start_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(sorting_selection.adapter.selection)[23:-2]
+	        	on_text:  root.change_sorting_text(self.text)	
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(top_selection.adapter.selection)[23:-2]
+	        	on_text:  root.change_top_text(self.text)
+
+	        ######
+	        Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "start year:"
+	        	text: "年份"
+	        	color: 1, 1, 1, 1
+	        	font_name: "STKAITI.TTF"
+				font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_start
+					#text: str(year_result_start.adapter.selection)[23:-2]
+					#on_text: root.search_for_end_year(self.text)
+					color: 0, 0, 0, 1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+			    	id: show_start_year
+			        size_hint_x: 0.2
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_start_year_selection()
+			            else: root.clear_start_year_selection()
+			BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:year_result_start
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			
+			Label:
+				size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	text: "排序方式选择"
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: '18px'
+	        BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+			        id:which_sorting_way
+			        font_size: 20
+	        		#text_size: self.width, None
+	        		font_name: "STKAITI.TTF"
+			        #on_text: root.search_for_month(self.text)
+			        color: 0, 0, 0, 1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+			    	id: show_sorting_way
+			        size_hint_x: 0.2
+			        on_state:   
+			            if self.state == 'down': root.show_sorting_selection()
+			            else: root.clear_sorting_selection()
+		    BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:sorting_selection
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			Label:
+				size_hint_y: 0.2
+	        	text_size: self.width, None
+	        	text: "Top"
+				font_size: '20px'
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+			BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+			        id: top
+					size_hint_x: 0.8
+			        font_size: 20
+	        		#text_size: self.width, None
+			        #on_text: root.search_for_month(self.text)
+			        color: 0, 0, 0, 1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+			    	id: show_top_way
+			        size_hint_x: 0.2
+			        on_state:   
+			            if self.state == 'down': root.show_top_selection()
+			            else: root.clear_top_selection()
+		    BoxLayout:
+				size_hint_y: 0.6
+			    ListView: 
+			        id:top_selection
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			BoxLayout:
+				size_hint_y: 0.3
+			    Button:
+				    size_hint: None, None
+				    width: 50
+				    height: 50
+				    border: 0,0,0,0
+				    background_down: 'pictures/prev_dir_down.png'
+				    background_normal: 'pictures/prev_dir.png'
+				    on_release: 
+				    	root.clear_everything()
+						root.NextPage("catalog")
+						#app.root.current="seventh"
+		#########分界线#########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########################
+		BoxLayout:
+			orientation: "vertical"
+			spacing: 10
+			Label:
+				size_hint_y: 0.001
+			BoxLayout:
+				size_hint_y: 0.13
+				orientation: "horizontal"
+				BoxLayout:
+					Label:
+						size_hint_x: 0.85
+						#text: "Visualization Function"
+						text_size: self.width, None
+						text: "Top电影"
+						font_name: "FZSTK"
+						font_size: 40
+						color: 1,1,1,1
+					BoxLayout:
+						size_hint_x: 0.55
+					BoxLayout:
+						size_hint_x: 0.3
+						orientation: 'vertical'
+						Label:
+							size_hint_y: 0.03
+						Button:
+							size_hint_y: 0.1
+							text: "打印"
+							font_name: "STKAITI.TTF"
+							font_size: 20
+							background_normal: music_button
+							on_release: 
+								root.current_plot_export()
+			BoxLayout:
+				spacing: 15
+				size_hint_y: 0.1
+				ToggleButton:
+					id: word cloud
+					group: "visualization function"
+					#text: "word cloud"
+					text: "词云图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+				ToggleButton:
+					id: bar plot
+					group: "visualization function"
+					#text: "bar plot"
+					text: "条形图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+        		Label:
+        			id: function
+        			canvas.before:
+		                Color:
+		                    rgba: 1, 1, 1, 1
+		                Rectangle:
+		                    pos: self.pos
+		                    size: self.size
+		            color: 0,0,0,1
+		            font_name: "STKAITI.TTF"
+					font_size: '20px'
+        		Button:
+        			text: "apply"
+					font_size: '20px'
+					background_normal: music_button
+        			on_release: 
+	        			if function.text=='': Factory.Mypopup().open()
+	        			elif which_year_start.text=='' :  Factory.MyTimepopup().open()
+	        			elif which_sorting_way.text=='': Factory.MySortingpopup().open()
+	        			elif top.text=='': Factory.MyToppopup().open()
+	        			else: root.Top_movie_plot()
+			BoxLayout:
+				Image:
+					id: picture
+					source: blank_plot_path
+		Label:
+			size_hint_x: 0.01
+
+<SeventhScreen>:
+	name : "seventh"
+	plot_to_export_selection: plot_to_export_selection
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		orientation: "horizontal"
+		BoxLayout:
+			spacing: 20
+			orientation: "vertical"
+		    #test不合理操作，但是目前还没想出别的解决办法
+			Label:
+				text: str(plot_to_export_selection.adapter.selection)
+				font_name: "STKAITI.TTF"
+				size_hint_y: 0.0001
+		        text_size: self.width*0.00001, self.width*0.000001
+		    ####################
+		    BoxLayout:
+		    	size_hint_y: 0.25
+		    	spacing: 10
+		    	BoxLayout:
+					size_hint_x: 0.1
+				Label:
+					size_hint_x: 0.8
+					text_size: self.width, self.height
+					valign: 'middle'
+					#halign: 'center'
+					text: "您已将以下图表加入导出列表，请点击你想要生成在报告中的图表:"
+					font_name: "STKAITI.TTF"
+					font_size: 18
+				BoxLayout:
+					size_hint_x: 0.1
+				Button:
+					size_hint_x: 0.2
+					text: "点击显示"
+					font_name: "STKAITI.TTF"
+					font_size: 18
+					background_normal: music_button
+					on_release: root.show_exporting_plots()
+				BoxLayout:
+					size_hint_x: 0.1
+			BoxLayout:
+				size_hint_y: 0.8	
+				orientation: "horizontal"
+				BoxLayout:
+					size_hint_x: 0.25
+				BoxLayout:
+					ListView: 
+						size_hint_x: 0.5
+				        id:plot_to_export_selection
+				        adapter:
+				            ListAdapter(data=[], cls=main.SelectionButton,selection_mode='multiple')
+			    BoxLayout:
+			    	size_hint_x: 0.25
+			BoxLayout:
+				size_hint_y: 0.20
+				Button:
+					size_hint: None, None
+					width: self.parent.height
+					height: self.parent.height
+					border: 0,0,0,0
+					background_down: 'pictures/prev_dir_down.png'
+					background_normal: 'pictures/prev_dir.png'
+					on_release: 
+						root.clear_everything()
+						root.NextPage("catalog")
+				Button:
+					#size_hint_y: 0.1
+					text: "确认"
+					width: self.parent.width - self.parent.height
+					height: self.parent.height
+					font_name: "STKAITI.TTF"
+					font_size: 18
+					background_normal: music_button
+					on_release: 
+						if root.checked() == 1: root.NextPage('save')
+						
+<EighthScreen>:
+	name: "eighth"
+	search_year_start: which_year_start
+    #search_year_end: which_year_end
+    year_results_start: year_result_start
+    #year_results_end: year_result_end
+    #sorting_way: which_sorting_way
+    #sorting_selections: sorting_selection
+    top_selections: top_selection
+    top_num: top
+	canvas.before:
+		Rectangle:
+		    pos: self.pos
+		    size: self.size
+		    #source: "/Users/yanhongshu/Downloads/5d0e3d4868f75f58cfe0f7ac66005435.jpg"
+		    #source: "pictures/blue_dots.png"
+		    source: background_source
+	BoxLayout:
+		spacing: 15
+		orientation: 'horizontal'
+		BoxLayout:
+	        size_hint_x : 0.2
+	        orientation: "vertical"
+	        spacing: 5
+			Label:
+				size_hint_y: 0.05
+	        Label:
+	        	size_hint_y: 0.25
+	        	text_size: self.width, None
+	        	#text: "Time Range "
+	        	text: "时间范围"
+	        	font_name: "STKAITI.TTF"
+				font_size: '28px'
+	        #test不合理操作，但是目前还没想出别的解决办法
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(year_result_start.adapter.selection)[23:-2]
+	        	on_text: root.change_start_year_text(self.text)
+	        Label:
+	        	size_hint_y: 0.0001
+	        	text_size: self.width*0.00001, self.width*0.000001
+	        	text: str(top_selection.adapter.selection)[23:-2]
+	        	on_text:  root.change_top_text(self.text)
+
+	        ######
+	        Label:
+	        	size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	#text: "start year:"
+	        	text: "年份"
+	        	color: 1, 1, 1, 1
+	        	font_name: "STKAITI.TTF"
+				font_size: '20px'
+			BoxLayout:
+				size_hint_y: 0.2
+				orientation: "horizontal"
+		        Label:
+					size_hint_x: 0.8
+		        	font_size: 20
+	        		#text_size: self.width, None
+					id:which_year_start
+					#text: str(year_result_start.adapter.selection)[23:-2]
+					#on_text: root.search_for_end_year(self.text)
+					color: 0, 0, 0, 1
+					canvas.before:
+						Color:
+							rgba: 1, 1, 1, 1
+						Rectangle:
+							pos: self.pos
+							size: self.size
+			    MyButton:
+			    	id: show_start_year
+			        size_hint_x: 0.3
+			        height: self.parent.height
+			        on_state:   
+			            if self.state == 'down': root.show_start_year_selection()
+			            else: root.clear_start_year_selection()
+			BoxLayout:
+				size_hint_y: 0.8
+			    ListView: 
+			        id:year_result_start
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			
+			Label:
+				size_hint_y: 0.15
+	        	text_size: self.width, None
+	        	text: "Top"
+	        	font_name: "STKAITI.TTF"
+	        	color: 1, 1, 1, 1
+				font_size: 20
+			BoxLayout:
+			    size_hint_y: 0.2
+	        	orientation: "horizontal"
+		        Label:
+			        id: top
+					size_hint_x: 0.8
+			        font_size: 20
+	        		#text_size: self.width, None
+			        #on_text: root.search_for_month(self.text)
+			        color: 0, 0, 0, 1
+			        canvas.before:
+			            Color:
+			                rgba: 1, 1, 1, 1
+			            Rectangle:
+			                pos: self.pos
+			                size: self.size
+			    MyButton:
+			    	id: show_top_way
+			        size_hint_x: 0.3
+			        on_state:   
+			            if self.state == 'down': root.show_top_selection()
+			            else: root.clear_top_selection()
+		    BoxLayout:
+				size_hint_y: 0.8
+			    ListView: 
+			        id:top_selection
+			        adapter:
+			            ListAdapter(data=[], cls=main.SelectionButton,selection_mode="single")
+			BoxLayout:
+				size_hint_y: 0.3
+			    Button:
+				    size_hint: None, None
+				    width: 50
+				    height: 50
+				    border: 0,0,0,0
+				    background_down: 'pictures/prev_dir_down.png'
+				    background_normal: 'pictures/prev_dir.png'
+				    on_release: 
+						root.clear_everything()
+						root.NextPage("catalog")
+						#app.root.current="sixth"
+		#########分界线#########
+		BoxLayout:
+			size_hint_x: 0.01
+			canvas.after:
+				Color:
+		            rgba: 1, 1, 1, 1
+		        Rectangle:
+		            pos: self.pos
+		            size: self.size
+		########################
+		BoxLayout:
+			orientation: "vertical"
+			spacing: 10
+			Label:
+				size_hint_y: 0.001
+			BoxLayout:
+				size_hint_y: 0.13
+				orientation: "horizontal"
+				BoxLayout:
+					Label:
+						size_hint_x: 0.85
+						#text: "Visualization Function"
+						text: "最佳导演"
+						font_name: "FZSTK"
+						#font_name: "STKAITI.TTF"
+						font_size: 40
+						text_size: self.width, None
+						color: 1, 1, 1, 1
+					BoxLayout:
+						size_hint_x: 0.55
+					BoxLayout:
+						size_hint_x: 0.3
+						orientation: 'vertical'
+						Label:
+							size_hint_y: 0.03
+						Button:
+							size_hint_y: 0.1
+							text: "打印"
+							font_name: "STKAITI.TTF"
+							font_size: 20
+							background_normal: music_button
+							on_release: 
+								root.current_plot_export()
+			BoxLayout:
+				spacing: 15
+				size_hint_y: 0.1
+				ToggleButton:
+					id: word cloud
+					group: "visualization function"
+					#text: "word cloud"
+					text: "词云图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+				ToggleButton:
+					id: bar plot
+					group: "visualization function"
+					#text: "bar plot"
+					text: "条形图"
+					font_name: "STKAITI.TTF"
+					font_size: 20
+        			#text_size: self.width, None
+					background_normal: music_button
+        			on_release: 
+        				if self.state=='down':  root.show_funtion(self.text)
+        				else:  function.text=''
+        		Label:
+        			id: function
+        			canvas.before:
+		                Color:
+		                    rgba: 1, 1, 1, 1
+		                Rectangle:
+		                    pos: self.pos
+		                    size: self.size
+		            color: 0, 0, 0, 1
+		            font_name: "STKAITI.TTF"
+					font_size: 20
+        		Button:
+        			text: "apply"
+					font_size: 20
+					background_normal: music_button
+        			on_release: 
+	        			if function.text=='': Factory.Mypopup().open()
+	        			elif which_year_start.text=='' :  Factory.MyTimepopup().open()
+	        			elif top.text=='': Factory.MyToppopup().open()
+	        			else: root.Top_movie_director_plot()
+			BoxLayout:
+				Image:
+					id: picture
+					source: blank_plot_path
+		Label:
+			size_hint_x: 0.01	
+			
+	
+					
+<FileChooserListView>:
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    layout: layout
+    FileChooserListLayout:
+        id: layout
+        controller: root
+
+[FileListEntry@FloatLayout+TreeViewNode]:
+    locked: False
+    entries: []
+    path: ctx.path
+    is_selected: self.path in ctx.controller().selection
+
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: '48dp' if dp(1) > 1 else '24dp'
+    is_leaf: not ctx.isdir or ctx.name.endswith('..' + ctx.sep) or self.locked
+    on_touch_down: self.collide_point(*args[1].pos) and ctx.controller().entry_touched(self, args[1])
+    on_touch_up: self.collide_point(*args[1].pos) and ctx.controller().entry_released(self, args[1])
+    BoxLayout:
+        pos: root.pos
+        size_hint_x: None
+        width: root.width - dp(10)
+        Label:
+            color: 0, 0, 0, 1
+            id: filename
+            text_size: self.width, None
+            halign: 'left'
+            shorten: True
+            text: ctx.name
+            font_name: "simhei"
+        Label:
+            color: 0, 0, 0, 1
+            text_size: self.width, None
+            size_hint_x: None
+            halign: 'right'
+            text: '{}'.format(ctx.get_nice_size())
+
+
+<SaveDialog>:
+	name: "save"
+    text_input: text_input
+    canvas.before:
+        Color:
+            rgb: 1, 1, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+			size_hint_y: 1
+			id: filechooser
+			#on_selection: text_input.text = self.selection and self.selection[0] or ''
+			rootpath: 
+				root.rootpath
+		Label:
+			canvas.before:
+				Color:
+					rgb: 0.8, 0.8, 0.8
+				Rectangle:
+					pos: self.pos
+					size: self.size
+			size_hint_y: 0.1
+			font_name: 'simhei'
+			font_size: 18
+			valign: 'middle'
+			color: 0,0,0,1
+			text: " 文件名(*.pdf)  (初始路径为桌面)"
+			text_size: self.width, self.height
+		TextInput:
+            id: text_input
+            size_hint_y: 0.15
+            height: 30
+            multiline: False
+			font_name: 'STKAITI.TTF'
+			font_size: 20
+        BoxLayout:
+            height: 50
+            size_hint_y: 0.2
+            Button:
+			    size_hint: None, None
+			    width: 50
+			    height: self.parent.height
+			    border: 0,0,0,0
+			    background_down: 'pictures/prev_dir_down.png'
+			    background_normal: 'pictures/prev_dir.png'
+			    on_release: 
+					root.NextPage("seventh")
+					filechooser.path = root.rootpath
+					text_input.text=''
+            Button:
+				size_hint: None, None
+			    width: self.parent.width-50
+			    height: self.parent.height
+				text: "保存"
+				font_size: 18
+				font_name: 'STKAITI.TTF'
+				background_normal: music_button
+				on_release: 
+                    root.save(filechooser.path, text_input.text)
+					text_input.text=''
+                    #Factory.Succeedpopup().open()
+
+<SpiderInfo>:
+	auto_dismiss: False
+	title: "Info"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "数据爬取每一年需要2～3分钟"
+			font_size: 18
+			font_name: "simhei"
+			text_size: self.width, self.height*0.55
+		BoxLayout:
+			orientation: "horizontal"
+			Button:
+				text: "确认"
+				font_name: "simhei"
+				on_release: 
+					root.dismiss()
+					root.start_second_thread()
+			Button:
+				text: "取消"
+				font_name: "simhei"
+				on_release: 
+					root.dismiss()
+					app.root.current="scrapy"
+
+<Finished>:
+	auto_dismiss: False
+	title: "Success"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "数据爬取已结束"
+			font_size: 18
+			font_name: "simhei"
+			text_size: self.width, self.height*0.55
+		Button:
+			text: "返回"
+			font_name: "simhei"
+			on_release: 
+				root.dismiss()
+<NoPlotSelected>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "尚未选择导出图表"
+			font_size: 18
+			font_name: "simhei"
+			text_size: self.width, self.height*0.55
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: 
+				app.root.current="seventh"
+				root.dismiss()
+<NoPlotYet>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "尚未绘图"
+			font_size: 18
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<Exported>:
+	auto_dismiss: False
+	title: "Success"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "当前图片已导出"
+			font_size: 18
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+
+<NoFileName>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请输入文件名"
+			font_size: 18
+			text_size: self.width, self.height*0.55
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<InvalidPath>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请选择合法文件路径"
+			font_size: 18
+			text_size: self.width, self.height*0.55
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<SaveSucceed>:
+	auto_dismiss: False
+	title: "Success"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "图表文件导出成功"
+			font_size: 18
+			text_size: self.width, self.height*0.55
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: 
+				root.dismiss()
+				app.root.current='seventh'
+<NoSearchResultFoundPopup@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "没找到结果"
+			font_size: "18px"
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<MyTimepopup@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请选择时间范围"
+			font_size: "18px"
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<MySortingpopup@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请选择排序方式"
+			font_size: "18px"
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<MyToppopup@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请选择前几名"
+			font_size: "18px"
+			text_size: self.width, self.height*0.25
+			font_name: "simhei"
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+<Mypopup@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "请选择可视化功能"
+			font_size: "18px"
+			font_name: "simhei"
+			text_size: self.width, self.height*0.25
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()	
+<VisitorLimit@Popup>:
+	auto_dismiss: False
+	title: "Warning"
+	size_hint: 0.5, 0.5
+	BoxLayout:
+		orientation: "vertical"
+		Label:
+			text: "游客不能使用该功能"
+			font_size: "18px"
+			font_name: "simhei"
+			text_size: self.width, self.height*0.55
+		Button:
+			text: "关闭"
+			font_name: "simhei"
+			on_release: root.dismiss()
+			
+				
+<SelectionButton>:
+	deselected_color: 0.8,0.8,0.8,1
+	selected_color: 0.4,0.4,0.4,1
+	#font_name: "STKAITI.TTF"
+	#text_size: self.width, None
+	font_name: 'simhei'
+	
